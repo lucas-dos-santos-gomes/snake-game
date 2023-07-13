@@ -96,11 +96,11 @@ function show() {
   document.getElementById("board").innerHTML = board.flat().map(e => `<img src="./src/img/${pieces[e]}">`).join('');
 }
 
-function move () {
+function move() {
   headPosition.x += (moves[key]?.x || 0);
   headPosition.y += (moves[key]?.y || 0);
   
-  if (board[headPosition.y][headPosition.x] > 1) {
+  if(board[headPosition.y][headPosition.x] > 1) {
     return gameOver();
   }
   snake.unshift({
@@ -112,40 +112,40 @@ function move () {
   bodyPosition();
 }
 
-function gameOver () {
+function gameOver() {
   window.clearInterval(interval);
   alert("Game Over");
   window.location.reload();
 }
 
-function bodyPosition () {
-  if (snake.length > 2) {
+function bodyPosition() {
+  if(snake.length > 2) {
     let x = snake[0].x - snake[2].x;
     let y = snake[0].y - snake[2].y;
 
-    if (x == 0) {
+    if(x == 0) {
       snake[1].body = 12;
-    } else if (y == 0) {
+    } else if(y == 0) {
       snake[1].body = 11;
-    } else if (x > 0) {
-      if (snake[1].y > snake[2].y) {
+    } else if(x > 0) {
+      if(snake[1].y > snake[2].y) {
         snake[1].body = 10;
-      } else if (snake[1].y < snake[2].y) {
+      } else if(snake[1].y < snake[2].y) {
         snake[1].body = 8;
       } else {
-        if (snake[1].y > snake[0].y) {
+        if(snake[1].y > snake[0].y) {
           snake[1].body = 9;
         } else {
           snake[1].body = 7;
         }
       }
     } else {
-      if (snake[1].y > snake[2].y) {
+      if(snake[1].y > snake[2].y) {
         snake[1].body = 9;
-      } else if (snake[1].y < snake[2].y) {
+      } else if(snake[1].y < snake[2].y) {
         snake[1].body = 7;
       } else {
-        if (snake[1].y > snake[0].y) {
+        if(snake[1].y > snake[0].y) {
           snake[1].body = 10;
         } else {
           snake[1].body = 8;
@@ -156,8 +156,8 @@ function bodyPosition () {
   eatFood();
 }
 
-function eatFood () {
-  if (board[headPosition.y][headPosition.x] == 1) {
+function eatFood() {
+  if(board[headPosition.y][headPosition.x] == 1) {
     document.getElementById("points").innerHTML = ++points;
     while (board[food.y][food.x] != 0) {
       food.x = parseInt(Math.random() * 18) + 1;
@@ -173,27 +173,27 @@ function eatFood () {
   tailPosition();
 }
 
-function speedBoost () {
-  if (snake.length < 10) {
+function speedBoost() {
+  if(snake.length < 10) {
     speed *= 0.97;
-  } else if (snake.length < 20) {
+  } else if(snake.length < 20) {
     speed *= 0.98;
   } else {
     speed *= 0.99;
   }
 }
 
-function tailPosition () {
+function tailPosition() {
   let snakeLen = snake.length;
-  if (snakeLen > 1) {
+  if(snakeLen > 1) {
     let x = snake[snakeLen - 1].x - snake[snakeLen - 2].x;
     let y = snake[snakeLen - 1].y - snake[snakeLen - 2].y;
 
-    if (x > 0) {
+    if(x > 0) {
       snake[snakeLen - 1].body = 4;
-    } else if (x < 0) {
+    } else if(x < 0) {
       snake[snakeLen - 1].body = 3;
-    } else if (y > 0) {
+    } else if(y > 0) {
       snake[snakeLen - 1].body = 6;
     } else {
       snake[snakeLen - 1].body = 5;
@@ -202,19 +202,19 @@ function tailPosition () {
   show();
 }
 
-function setKey (e) {
+function setKey(e) {
   pause(e);
-  if (space) {
-    if (moves[e.key] && moves[key].invalid != e.key) {
+  if(space) {
+    if(moves[e.key] && moves[key].invalid != e.key) {
       key = e.key;
     } 
   }
 }
 
-function pause (e) {
-  if (e.code == "Space") {
+function pause(e) {
+  if(e.code == "Space") {
     space = !space;
-    if (space) {
+    if(space) {
       interval = window.setInterval(move, speed);
     } else {
       window.clearInterval(interval);
@@ -222,10 +222,10 @@ function pause (e) {
   }
 }
 
-function textFlash () {
+function textFlash() {
   let getText = document.querySelectorAll("p");
   getText.forEach(e => {
-    if (e.innerHTML == "Press \"Space\" to pause") {
+    if(e.innerHTML == "Press \"Space\" to pause") {
       e.innerHTML = '';
     } else {
       e.innerHTML = "Press \"Space\" to pause";
