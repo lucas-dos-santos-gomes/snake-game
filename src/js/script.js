@@ -224,11 +224,12 @@ function pause(e) {
 
 function textFlash() {
   let getText = document.querySelectorAll("p");
+  let pauseOrContinue = (space) ? "pause" : "continue";
   getText.forEach(e => {
-    if(e.innerHTML == "Press \"Space\" to pause") {
+    if(e.innerHTML == `Press "Space" to ${pauseOrContinue}`) {
       e.innerHTML = '';
     } else {
-      e.innerHTML = "Press \"Space\" to pause";
+      e.innerHTML = `Press "Space" to ${pauseOrContinue}`;
     }
   });
 }
