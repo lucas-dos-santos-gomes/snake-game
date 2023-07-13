@@ -49,3 +49,8 @@ p {
 img {
   width: 26px;
 }
+
+.titles {
+  display: flex;
+  justify-content: space-between;
+}

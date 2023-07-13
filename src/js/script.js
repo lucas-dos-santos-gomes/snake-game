@@ -113,6 +113,7 @@ function move() {
 }
 
 function gameOver() {
+  saveRecord();
   window.clearInterval(interval);
   alert("Game Over");
   window.location.reload();
@@ -166,7 +167,7 @@ function eatFood() {
     speedBoost();
     window.clearInterval(interval);
     interval = window.setInterval(move, parseInt(speed));
-
+    saveRecord();
   } else {
     snake.pop();
   }
@@ -233,8 +234,24 @@ function textFlash() {
     }
   });
 }
-
 window.setInterval(textFlash, 700);
+
+function saveRecord() {
+  if(localStorage.record) {
+    localStorage.record = (points > +(localStorage.record)) ? points : localStorage.record;
+    showRecord();
+  } else {
+    localStorage.setItem("record", points);
+  }
+}
+
+function showRecord() {
+  if(+(localStorage.record) > 0) {
+    const recordTitle = document.querySelector(".record-title");
+    recordTitle.innerHTML = "Record: " + localStorage.record;
+  }
+}
+window.onload = saveRecord;
 
 document.addEventListener("keydown", setKey);
 show();
