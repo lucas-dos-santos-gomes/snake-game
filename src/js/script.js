@@ -260,13 +260,8 @@ pauseButton.addEventListener("click", changePauseButton);
 
 function changePauseButton() {
   pause(pauseButton.id);
-  if(space) {
-    pauseButton.classList.remove("fa-play");
-    pauseButton.classList.add("fa-pause");    
-  } else {
-    pauseButton.classList.remove("fa-pause");
-    pauseButton.classList.add("fa-play");
-  }
+  pauseButton.classList.toggle("fa-play");
+  pauseButton.classList.toggle("fa-pause");
 }
 
 document.addEventListener("keydown", setKey);
