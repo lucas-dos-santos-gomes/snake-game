@@ -204,7 +204,7 @@ function tailPosition() {
 }
 
 function setKey(e) {
-  pause(e);
+  pause(e.code);
   if(space) {
     if(moves[e.key] && moves[key].invalid != e.key) {
       key = e.key;
@@ -213,7 +213,7 @@ function setKey(e) {
 }
 
 function pause(e) {
-  if(e.code == "Space") {
+  if(e == "Space" || e == "pause-button") {
     space = !space;
     if(space) {
       interval = window.setInterval(move, speed);
@@ -254,6 +254,20 @@ function showRecord() {
   }
 }
 window.onload = saveRecord;
+
+const pauseButton = document.querySelector("#pause-button");
+pauseButton.addEventListener("click", changePauseButton);
+
+function changePauseButton() {
+  pause(pauseButton.id);
+  if(space) {
+    pauseButton.classList.remove("fa-play");
+    pauseButton.classList.add("fa-pause");    
+  } else {
+    pauseButton.classList.remove("fa-pause");
+    pauseButton.classList.add("fa-play");
+  }
+}
 
 document.addEventListener("keydown", setKey);
 show();
