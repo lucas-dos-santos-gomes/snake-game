@@ -50,6 +50,12 @@ body {
   margin-bottom: 40px;
 }
 
+.center > i {
+  display: none;
+  font-size: 30px;
+  padding: 10px;
+}
+
 #board {
   background-image: url(../img/background-green.png);
   width: 520px;
@@ -67,5 +73,21 @@ body {
 
   .center p {
     display: none;
+  }
+
+  @media screen and (max-width: 450px) {
+    .center {
+      height: 100%;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+
+    #board {
+      width: 100%;
+    }
+
+    .center i {
+      display: block;
+    }
   }
 }
