@@ -43,7 +43,7 @@ body {
   align-items: center;
 }
 
-p {
+.center > p {
   width: 228px;
   text-align: center;
   font-size: 25px;
@@ -56,6 +56,16 @@ p {
   font-size: 0;
 }
 
-img {
+#board > img {
   width: 5%;
+}
+
+@media screen and (max-width: 768px) {
+  .main {  
+    padding-inline: 10px;
+  }
+
+  .center p {
+    display: none;
+  }
 }
