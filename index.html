@@ -15,20 +15,23 @@
   </head>
 
   <body onload="start()">
-    <div class="center">
-      <h1 translate="no">Snake Game</h1>
-    </div>
-    <div class="titles">
-      <h2 class="points-title">
-        Points: <span id="points">0</span>
-      </h2>
-      <h2 class="record-title"></h2>
-    </div>
-    <div class="center">
-      <p>Press "Space" to pause</p>
-      <div id="board"></div>
-      <p>Press "Space" to pause</p>
-    </div>
+    <header class="header">
+      <h1 class="snake-title" translate="no">Snake Game</h1>
+      <div class="titles">
+        <h2 class="points-title">
+          Points: <span id="points">0</span>
+        </h2>
+        <h2 class="record-title"></h2>
+      </div>
+    </header>
+    
+    <main class="main">
+      <div class="center">
+        <p>Press "Space" to pause</p>
+        <div id="board"></div>
+        <p>Press "Space" to pause</p>
+      </div>
+    </main>
 
     <script src="./src/js/script.js"></script>
   </body>
