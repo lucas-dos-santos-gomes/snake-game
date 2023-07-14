@@ -1,4 +1,3 @@
-window.onload = start;
 let start = () => {
   saveRecord();
   (window.innerWidth > 768) ? alert("Press 'Enter' to start the game") : alert("Click to start the game");
@@ -313,3 +312,4 @@ window.addEventListener("touchend", () => {
 document.addEventListener("keydown", setKey);
 show();
 interval = window.setInterval(move, speed);
+window.onload = start;
