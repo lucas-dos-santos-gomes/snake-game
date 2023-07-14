@@ -204,7 +204,7 @@ function tailPosition() {
 }
 
 function setKey(e) {
-  pause(e.code);
+  (e.code == "Space") && changePauseButton();
   if(space) {
     if(moves[e.key] && moves[key].invalid != e.key) {
       key = e.key;
@@ -212,14 +212,12 @@ function setKey(e) {
   }
 }
 
-function pause(e) {
-  if(e == "Space" || e == "pause-button") {
-    space = !space;
-    if(space) {
-      interval = window.setInterval(move, speed);
-    } else {
-      window.clearInterval(interval);
-    }
+function pause() {
+  space = !space;
+  if(space) {
+    interval = window.setInterval(move, speed);
+  } else {
+    window.clearInterval(interval);
   }
 }
 
@@ -257,12 +255,22 @@ window.onload = saveRecord;
 
 const pauseButton = document.querySelector("#pause-button");
 pauseButton.addEventListener("click", changePauseButton);
+window.addEventListener("dbltouch", changePauseButton);
 
 function changePauseButton() {
-  pause(pauseButton.id);
+  pause();
   pauseButton.classList.toggle("fa-play");
   pauseButton.classList.toggle("fa-pause");
 }
+
+let dblTouch = [-1000, -1000];
+window.addEventListener("touchstart", (e) => {
+  dblTouch.shift();
+  dblTouch.push(e.timeStamp);
+  if(dblTouch[1] - dblTouch[0] < 500) {
+    changePauseButton();
+  }
+});
 
 document.addEventListener("keydown", setKey);
 show();
