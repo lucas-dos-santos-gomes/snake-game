@@ -1,3 +1,4 @@
+window.onload = start;
 let start = () => {
   saveRecord();
   (window.innerWidth > 768) ? alert("Press 'Enter' to start the game") : alert("Click to start the game");
@@ -296,11 +297,12 @@ window.addEventListener("touchmove", e => {
   
     if(touchX > touchY) {
       touchX = moveTouchX[1] - moveTouchX[0];
-      key = (touchX < 0) ? "ArrowLeft" : "ArrowRight";
+      falseKey = (touchX < 0) ? "ArrowLeft" : "ArrowRight";
     } else if(touchX < touchY) {
       touchY = moveTouchY[1] - moveTouchY[0];
-      key = (touchY < 0) ? "ArrowUp" : "ArrowDown";
+      falseKey = (touchY < 0) ? "ArrowUp" : "ArrowDown";
     }
+    key = (moves[key].invalid != falseKey) ? falseKey : key;
   }
 });
 window.addEventListener("touchend", () => {
