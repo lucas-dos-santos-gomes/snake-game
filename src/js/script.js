@@ -1,4 +1,7 @@
-let start = () => alert("Press 'Enter' to start the game");
+let start = () => {
+  saveRecord();
+  (window.innerWidth > 768) ? alert("Press 'Enter' to start the game") : alert("Click to start the game");
+}
 
 let board;
 let interval;
@@ -251,7 +254,6 @@ function showRecord() {
     recordTitle.innerHTML = "Record: " + localStorage.record;
   }
 }
-window.onload = saveRecord;
 
 const pauseButton = document.querySelector("#pause-button");
 pauseButton.addEventListener("click", changePauseButton);
@@ -263,13 +265,47 @@ function changePauseButton() {
   pauseButton.classList.toggle("fa-pause");
 }
 
-let dblTouch = [-1000, -1000];
-window.addEventListener("touchstart", (e) => {
+/*let dblTouch = [-1000, -1000];
+window.addEventListener("touchstart", e => {
+  if(checkMove) {
+    checkMove = false;
+    return;
+  }
   dblTouch.shift();
   dblTouch.push(e.timeStamp);
   if(dblTouch[1] - dblTouch[0] < 500) {
     changePauseButton();
   }
+});*/
+
+let moveTouchX = [];
+let moveTouchY = [];
+let falseKey = key;
+window.addEventListener("touchmove", e => {
+  if(moveTouchX.length < 2 && moveTouchY.length < 2) {
+    moveTouchX.push(e.changedTouches[0].screenX);
+    moveTouchY.push(e.changedTouches[0].clientY);
+  } else {
+    moveTouchX.shift();
+    moveTouchY.shift();
+    moveTouchX.push(e.changedTouches[0].screenX);
+    moveTouchY.push(e.changedTouches[0].clientY);
+  
+    let touchX = (moveTouchX[1] - moveTouchX[0] < 0) ? (moveTouchX[1] - moveTouchX[0]) * -1 : (moveTouchX[1] - moveTouchX[0]);
+    let touchY = (moveTouchY[1] - moveTouchY[0] < 0) ? (moveTouchY[1] - moveTouchY[0]) * -1 : (moveTouchY[1] - moveTouchY[0]);
+  
+    if(touchX > touchY) {
+      touchX = moveTouchX[1] - moveTouchX[0];
+      key = (touchX < 0) ? "ArrowLeft" : "ArrowRight";
+    } else if(touchX < touchY) {
+      touchY = moveTouchY[1] - moveTouchY[0];
+      key = (touchY < 0) ? "ArrowUp" : "ArrowDown";
+    }
+  }
+});
+window.addEventListener("touchend", () => {
+  moveTouchX = [];
+  moveTouchY = [];
 });
 
 document.addEventListener("keydown", setKey);
