@@ -282,6 +282,7 @@ let moveTouchX = [];
 let moveTouchY = [];
 let falseKey = key;
 window.addEventListener("touchmove", e => {
+  e.preventDefault();
   if(moveTouchX.length < 2 && moveTouchY.length < 2) {
     moveTouchX.push(e.changedTouches[0].screenX);
     moveTouchY.push(e.changedTouches[0].clientY);
